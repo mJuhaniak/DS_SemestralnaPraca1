@@ -2,7 +2,10 @@ public class Main {
 
     public static void main(String [] args)
     {
-        //ParkingSuccessGenerator p = new ParkingSuccessGenerator(100000);
+        ParkingSuccessGenerator p = new ParkingSuccessGenerator(1000000, 33);
+        //BuffonNeedleGenerator b = new BuffonNeedleGenerator(1000000000);
+        //b.doReplications(1000000000);
+
 
         /*Random randSeed = new Random();
         double replications = 10000;

@@ -2,29 +2,47 @@ import java.util.Random;
 
 public class BuffonNeedleGenerator extends MonteCarloCore{
 
-    Random randAlpha = new Random();
-    Random randX = new Random();
+    Random randAlpha;
+    Random randX;
 
-    double L = 9;
-    double D = 10;
-    double m = 0;
+    double L;
+    double D;
+    double m;
+
+    int nReplications;
 
     public BuffonNeedleGenerator(int nReplications)
     {
+        this.nReplications = nReplications;
+
         this.doReplications(nReplications);
-        System.out.println("Buffon needle: " + (2 * L * nReplications) / (D * m) );
     }
 
     @Override
     public void oneReplication() {
-        double alpha = Math.toRadians(randAlpha.nextDouble() * 180);
-        double x = randX.nextDouble() * D;
+        double alpha = Math.toRadians(this.randAlpha.nextDouble() * 180);
+        double x = this.randX.nextDouble() * this.D;
 
-        double a = L * Math.sin(alpha);
+        double a = this.L * Math.sin(alpha);
 
-        if (a + x > D)
+        if (a + x > this.D)
         {
-            m++;
+            this.m++;
         }
+    }
+
+    @Override
+    public void beforeReplications() {
+        this.randAlpha = new Random();
+        this.randX = new Random();
+
+        this.L = 9;
+        this.D = 10;
+        this.m = 0;
+    }
+
+    @Override
+    public void afterReplications() {
+        System.out.println("Buffon needle: " + (2 * this.L * this.nReplications) / (this.D * this.m) );
     }
 }
